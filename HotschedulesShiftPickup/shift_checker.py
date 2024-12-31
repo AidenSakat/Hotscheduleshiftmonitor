@@ -47,6 +47,7 @@ while True:
                       message=f"Shift time: {shift_time}",
                       timeout=NOTIFICATION_TIMEOUT
                   )
+                  # Will auto pickup shift if availabe and notify you. Can disable in config
                   if auto_pickup:
                     WebDriverWait(driver, 5).until(
                         EC.presence_of_element_located((By.CSS_SELECTOR, ".echo-component-EchoButton-2670g.echo-component-footer-2KDZu"))
