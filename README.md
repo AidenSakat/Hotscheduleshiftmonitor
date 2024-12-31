@@ -1,6 +1,6 @@
 # Shift Checker Bot
 
-This Python script automates the process of logging into a website, checking for available shifts, and notifying the user if shifts are available. The bot is designed to track shifts on a schedule, automatically pick them up if enabled, and send notifications to the user about available shifts.
+This Python script automates the process of logging into hotschedules, checking for available shifts, and notifying the user if shifts are available. The bot is designed to track shifts on a schedule, automatically pick them up if enabled, and send notifications to the user about available shifts. (notifications work for windows)
 
 ## Requirements
 
@@ -14,6 +14,7 @@ This Python script automates the process of logging into a website, checking for
 1. **Install the required libraries**:
     ```bash
     pip install selenium
+    pip install selenium plyer
     ```
 
 2. **Download and install ChromeDriver**:
@@ -27,7 +28,7 @@ This Python script automates the process of logging into a website, checking for
 
 - `imports.py`: Contains all the necessary imports and modules.
 - `config.py`: Configuration file to store sensitive data and settings (e.g., login credentials, preferences).
-- `main.py`: Main script that performs login, checks shifts, sends notifications, and auto-picks up shifts.
+- `shift_checker.py`: Main script that performs login, checks shifts, sends notifications, and auto-picks up shifts.
 
 ## Script Overview
 
