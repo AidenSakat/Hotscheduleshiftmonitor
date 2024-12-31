@@ -1,52 +1,69 @@
-Installation
-Step 1: Clone the Repository
-Start by cloning the repository to your local machine:
+# Shift Checker Bot
 
-bash
-Copy code
-git clone https://github.com/your-username/shift-pickup-automation.git
-Step 2: Install Dependencies
-Navigate to the project directory and install the required Python packages using pip:
+This Python script automates the process of logging into a website, checking for available shifts, and notifying the user if shifts are available. The bot is designed to track shifts on a schedule, automatically pick them up if enabled, and send notifications to the user about available shifts.
 
-bash
-Copy code
-cd shift-pickup-automation
-pip install -r requirements.txt
-Step 3: Download ChromeDriver
-Download the version of ChromeDriver that matches your version of Google Chrome from the following link:
-ChromeDriver Downloads
+## Requirements
 
-Once downloaded, place the chromedriver executable in the project directory or add its path to the system environment variables.
+- Python 3.x
+- Selenium
+- Plyer (for notifications)
+- WebDriver for Chrome (make sure you have ChromeDriver installed)
 
-Configuration
-Step 1: Set Up Configuration File
-Before running the script, you'll need to set up the configuration file (config.py). In this file, define the following:
+## Setup
 
-URL: The URL of the website you need to log into.
-USERNAME: Your username for the website.
-PASSWORD: Your password for the website.
-OFF_DAYS: Days when you do not want to check for shifts (e.g., ["Tue", "Wed"]).
-AUTO_PICKUP: Set to True if you want the script to automatically pick up shifts when available, otherwise set it to False.
-NOTIFICATION_TIMEOUT: Duration for how long the notification will appear on the screen.
-REFRESH_PAGE: Time in seconds between each page refresh to check for updated shifts.
-Example configuration:
+1. **Install the required libraries**:
+    ```bash
+    pip install selenium
+    ```
 
-python
-Copy code
+2. **Download and install ChromeDriver**:
+    - Ensure that ChromeDriver is installed and matches the version of your Chrome browser. You can download it from [here](https://sites.google.com/a/chromium.org/chromedriver/).
+    - Add ChromeDriver to your system's PATH or specify its location in the script.
+
+3. **Configure your settings**:
+    - In the `config.py` file, set your `URL`, `USERNAME`, `PASSWORD`, and other configuration settings like `auto_pickup`, `off_days`, `NOTIFICATION_TIMEOUT`, and `REFRESH_PAGE`.
+
+## File Structure
+
+- `imports.py`: Contains all the necessary imports and modules.
+- `config.py`: Configuration file to store sensitive data and settings (e.g., login credentials, preferences).
+- `main.py`: Main script that performs login, checks shifts, sends notifications, and auto-picks up shifts.
+
+## Script Overview
+
+The script performs the following actions:
+
+1. **Login**: Logs into the website using the provided username and password.
+2. **Check for Available Shifts**: Continuously checks for available shifts, starting from the current day and checking future days.
+3. **Notify User**: Sends a notification if a shift is available for a day that is not in the `off_days` list.
+4. **Auto Pick-Up (Optional)**: If enabled in the config, the script will automatically pick up available shifts.
+5. **Page Refresh**: After each check, the page is refreshed to ensure the latest shift data is retrieved.
+
+## How to Use
+
+1. Set up your `config.py` with the necessary credentials and settings.
+2. Run the script:
+    ```bash
+    python shift_checker.py
+    ```
+
+3. The script will continuously monitor available shifts and notify you based on the configured settings.
+
+## Example Configuration (config.py)
+
+```python
 URL = "https://example.com"
 USERNAME = "your_username"
 PASSWORD = "your_password"
-OFF_DAYS = ["Tue", "Wed"]
-AUTO_PICKUP = True
+
+# List of days you do not want to pick up shifts
+off_days = ["Saturday", "Sunday"]
+
+# Notification timeout in seconds
 NOTIFICATION_TIMEOUT = 5
+
+# Auto pickup shift if available (True or False)
+auto_pickup = True
+
+# Frequency of page refresh in seconds
 REFRESH_PAGE = 60
-Step 2: Adjust Chrome Options
-The script is configured to run in a detached mode where the browser remains open after the script completes. If you want to close the browser automatically after execution, you can remove or adjust the chrome_options.add_experimental_option("detach", True) line in the script.
-
-Running the Script
-To run the script, simply execute the Python file:
-
-bash
-Copy code
-python shift_pickup.py
-The script will log in to the website, monitor available shifts, and send notifications when shifts are found or picked up. It will continue running in a loop, checking for new shifts and refreshing the page at the interval specified in the config.py file.
